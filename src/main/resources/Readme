@@ -1,0 +1,36 @@
+Hibernate: create table accounts (account_id bigint not null auto_increment, status enum ('ACTIVE','CLOSED'), account_type enum ('CURRENT','FIXED','SAVINGS'), balance float(53), created_at datetime(6), primary key (account_id)) engine=InnoDB
+Hibernate: create table customers (customer_id bigint not null auto_increment, address varchar(255), created_at datetime(6), email varchar(255), first_name varchar(255) not null, last_name varchar(255) not null, phone varchar(255), primary key (customer_id)) engine=InnoDB
+Hibernate: create table customers_account (account_id bigint not null, customer_id bigint not null) engine=InnoDB
+Hibernate: create table employees (employee_id bigint not null auto_increment, created_at datetime(6), branch varchar(255), email varchar(255), first_name varchar(255), last_name varchar(255), phone varchar(255), role enum ('LOAN_OFFICER','MANAGER','TELLER'), primary key (employee_id)) engine=InnoDB
+Hibernate: create table loan_approvals (approval_id bigint not null auto_increment, approved_at datetime(6), status enum ('APPROVED','REJECTED'), employee_id bigint, loans_loan_id bigint, primary key (approval_id)) engine=InnoDB
+Hibernate: create table loans (loan_id bigint not null auto_increment, amount float(53), created_at datetime(6), interest_rate float(23), status tinyint, loan_type tinyint, tenure_months integer, customers_customer_id bigint, primary key (loan_id)) engine=InnoDB
+Hibernate: create table transactions (transaction_id bigint not null auto_increment, amount float(53), status enum ('COMPLETED','FAILED','PENDING'), transaction_date datetime(6), transaction_type enum ('DEPOSIT','TRANSFER','WITHDRAWAL'), accounts_id bigint, primary key (transaction_id)) engine=InnoDB
+Hibernate: alter table customers drop index UKrfbvkrffamfql7cjmen8v976v
+Hibernate: alter table customers add constraint UKrfbvkrffamfql7cjmen8v976v unique (email)
+Hibernate: alter table customers drop index UKm3iom37efaxd5eucmxjqqcbe9
+Hibernate: alter table customers add constraint UKm3iom37efaxd5eucmxjqqcbe9 unique (phone)
+Hibernate: alter table loan_approvals drop index UKas6ptqicjy7nvddc4mx8winyd
+Hibernate: alter table loan_approvals add constraint UKas6ptqicjy7nvddc4mx8winyd unique (loans_loan_id)
+Hibernate: alter table loans drop index UK3fp7pu4m6cw89fttq54h4tcyu
+Hibernate: alter table loans add constraint UK3fp7pu4m6cw89fttq54h4tcyu unique (customers_customer_id)
+Hibernate: alter table customers_account add constraint FK5opo06fhsdsh0o0pviuhc85tv foreign key (customer_id) references customers (customer_id)
+Hibernate: alter table customers_account add constraint FKx2gewvljt99fv8tsv2wx2194 foreign key (account_id) references accounts (account_id)
+Hibernate: alter table loan_approvals add constraint FKennpd1a4xugw58ev9nuk81ar foreign key (employee_id) references employees (employee_id)
+Hibernate: alter table loan_approvals add constraint FKh35xg1x9pqwp9qmq1sqm7sres foreign key (loans_loan_id) references loans (loan_id)
+Hibernate: alter table loans add constraint FKlbl885iwfnhjvuubj24lc039q foreign key (customers_customer_id) references customers (customer_id)
+Hibernate: alter table transactions add constraint FKel117vif1str3l0in6f4metd3 foreign key (accounts_id) references accounts (account_id)
+
+
+
+ibernate: insert into accounts (status,account_type,balance,created_at) values (?,?,?,?)
+Hibernate: insert into customers (address,created_at,email,first_name,last_name,phone) values (?,?,?,?,?,?)
+Hibernate: insert into transactions (account_id,amount,status,transaction_date,transaction_type) values (?,?,?,?,?)
+Hibernate: insert into customers_account (account_id,customer_id) values (?,?)
+Hibernate: insert into accounts (status,account_type,balance,created_at) values (?,?,?,?)
+Hibernate: insert into customers (address,created_at,email,first_name,last_name,phone) values (?,?,?,?,?,?)
+Hibernate: insert into customers (address,created_at,email,first_name,last_name,phone) values (?,?,?,?,?,?)
+Hibernate: insert into transactions (account_id,amount,status,transaction_date,transaction_type) values (?,?,?,?,?)
+Hibernate: insert into customers_account (account_id,customer_id) values (?,?)
+Hibernate: insert into customers_account (account_id,customer_id) values (?,?)
+Hibernate: insert into accounts (status,account_type,balance,created_at) values (?,?,?,?)
+Hibernate: insert into transactions (account_id,amount,status,transaction_date,transaction_type) values (?,?,?,?,?)
