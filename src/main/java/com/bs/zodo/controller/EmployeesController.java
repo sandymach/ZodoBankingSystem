@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeesController {
@@ -20,8 +22,32 @@ public class EmployeesController {
 
 
     @GetMapping("/get")
-    public String get(){
-        return "hello";
+    public Employees getEmployee(@RequestParam Long id){
+        Employees emp = service.getEmployee(id);
+        return emp;
     }
+
+    @GetMapping("/get/all/{all}")
+    public List<Employees> getAllEmployees(@PathVariable String all){
+      return  service.getEmployees(all);
+    }
+
+    @GetMapping("/get/{name}")
+    public List<Employees> findByName(@PathVariable String name){
+        return  service.findByName(name);
+    }
+
+    @GetMapping("/starts/{p}")
+    public List<Employees> findByNameStartsWith(@PathVariable String p){
+      //  return  service.findByNameStartsWith(p);
+        return service.findByFirstNameStartsWithDistinctOrderByFirstName(p);
+    }
+
+    @GetMapping("/pagination/{p}")
+    public List<Employees> findByNameStartsWithAndPagination(@PathVariable String p){
+        return  service.findByNameStartsWithPagable(p);
+    }
+
+
 
 }

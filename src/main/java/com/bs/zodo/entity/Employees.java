@@ -46,6 +46,6 @@ public class Employees {
     private String branch;
     @Column(name = "created_at")
     private LocalDateTime CreatedAt;
-    @OneToMany(mappedBy = "employees")
-    private List<LoanApprovals> loanApprovals;
+//    @OneToMany(mappedBy = "employees")
+//    private List<LoanApprovals> loanApprovals;
 }
