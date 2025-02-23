@@ -3,6 +3,7 @@ package com.bs.zodo.repo;
 import com.bs.zodo.entity.Employees;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -15,5 +16,6 @@ public interface EmployeesRepo extends JpaRepository<Employees,Long> {
 
     List<Employees> findByFirstNameStartsWithOrderByFirstName(String prefix, Pageable pageable);
 
-    List<Employees> findDistinctByFirstName(String prefix);
+    @Query("SELECT DISTINCT e FROM Employees e")
+    List<Employees> findDistinctByFirstName(String firstName);
 }
