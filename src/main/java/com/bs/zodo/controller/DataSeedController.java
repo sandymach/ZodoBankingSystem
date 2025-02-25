@@ -1,6 +1,7 @@
 package com.bs.zodo.controller;
 
 import com.bs.zodo.DataSeeder;
+import com.bs.zodo.ZodoBsConfiguaration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class DataSeedController {
     @Autowired
     DataSeeder seeder ;
+
+    @Autowired
+    ZodoBsConfiguaration zodoBsConfiguaration;
 
     @GetMapping("/customers")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -27,4 +31,13 @@ public class DataSeedController {
         seeder.seedLoanApprovals();
         return "DataInserted in DB of Loanapprovals";
     }
+
+//    @GetMapping("/zodo-bs")
+//    @ResponseStatus(HttpStatus.ACCEPTED)
+//    public int getZodoBSConfig(){
+//        zodoBsConfiguaration.toString();
+//     return zodoBsConfiguaration.getDepositSC();
+//    }
+
+
 }
