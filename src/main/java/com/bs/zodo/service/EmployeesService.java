@@ -36,6 +36,11 @@ public class EmployeesService {
 
     }
 
+    public List<Employees> getEmployees(){
+        return repo.findAll();
+
+    }
+
     public List<Employees> findByName(String name){
         return  repo.findByFirstName(name);
     }
