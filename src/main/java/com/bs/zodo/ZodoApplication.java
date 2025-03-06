@@ -16,7 +16,7 @@ public class ZodoApplication {
 
         var context = SpringApplication.run(ZodoApplication.class, args);
 
-        formating();
+  //      formating();
         ZodoBsConfiguaration config = context.getBean(ZodoBsConfiguaration.class);
         System.out.println(config);
 
